@@ -67,8 +67,8 @@ function contextRelevance(task: Task): { value: number; detail: string } {
 }
 
 export function minutesBetween(start: string, end: string) {
-  const [sh, sm] = start.split(":").map(Number);
-  const [eh, em] = end.split(":").map(Number);
+  const [sh = 0, sm = 0] = start.split(":").map(Number);
+  const [eh = 0, em = 0] = end.split(":").map(Number);
   return eh * 60 + em - (sh * 60 + sm);
 }
 
@@ -107,7 +107,7 @@ export function scoreTask(task: Task, state: Pick<LifeOSState, "goals" | "events
     { label: "Effort & schedule fit", value: effort.value, detail: effort.detail },
   ];
 
-  const top = [...factors].sort((a, b) => b.value - a.value)[0];
+  const top = [...factors].sort((a, b) => b.value - a.value)[0]!;
   const reason =
     top.label === "Goal relevance"
       ? `${goal.detail} and it's ${deadline.detail.toLowerCase()}.`
@@ -213,7 +213,9 @@ export function buildDayPlan(state: LifeOSState, seed = 0): DayPlan {
       title: h.name,
       kind: "habit",
       detail: `Habit routine · ${currentStreak(h)} day streak`,
-      why: i === 0 ? "Your calendar is clear after 19:00, which is when you complete this most often." : undefined,
+      ...(i === 0
+        ? { why: "Your calendar is clear after 19:00, which is when you complete this most often." }
+        : {}),
     });
   });
 
