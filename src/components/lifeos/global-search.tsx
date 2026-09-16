@@ -23,11 +23,11 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
 
   const go = (to: string) => {
     onOpenChange(false);
-    void navigate({ to });
+    void navigate({ to: to as never });
   };
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} title="Search LifeOS" description="Search everything">
+    <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput
         placeholder="Search tasks, habits, goals, notes and events…"
         value={query}

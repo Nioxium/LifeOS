@@ -65,11 +65,11 @@ function NavItem({
   label: string;
   icon: typeof LayoutGrid;
   active: boolean;
-  onNavigate?: () => void;
+  onNavigate?: (() => void) | undefined;
 }) {
   return (
     <Link
-      to={to}
+      to={to as never}
       onClick={onNavigate}
       className={cn(
         "ring-focus group flex items-center gap-3 rounded-xl px-3 py-2 text-[14px] transition-all duration-200",
@@ -218,7 +218,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="ml-auto flex items-center gap-1">
             <Notifications />
             <Link
-              to="/settings"
+              to={"/settings" as never}
               aria-label="Profile"
               className="ring-focus ml-1 flex size-9 items-center justify-center rounded-full bg-[var(--sand)] text-[12px] font-semibold text-[var(--olive-deep)] transition-transform hover:scale-105"
             >
@@ -237,7 +237,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             return (
               <Link
                 key={to}
-                to={to}
+                to={to as never}
                 className={cn(
                   "flex flex-1 flex-col items-center gap-1 rounded-xl py-1.5 text-[11px] transition-colors",
                   active ? "text-[var(--olive)]" : "text-muted-foreground",
