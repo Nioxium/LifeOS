@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AppShell } from "@/components/lifeos/app-shell";
+import { Toaster } from "@/components/ui/sonner";
+import { LifeOSProvider } from "@/lib/lifeos/store";
 
 function NotFoundComponent() {
   return (
@@ -120,8 +123,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LifeOSProvider>
+        <AppShell>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </AppShell>
+      </LifeOSProvider>
+      <Toaster position="bottom-right" />
     </QueryClientProvider>
   );
 }
