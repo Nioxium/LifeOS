@@ -223,7 +223,7 @@ export function buildDayPlan(state: LifeOSState, seed = 0): DayPlan {
     });
   });
 
-  const personal = ranked.find((r) => r.task.category === "Personal");
+  const personal = ranked.find((r) => !scheduled.has(r.task.id) && r.task.category === "Personal");
   if (personal) {
     blocks.push({
       id: "plan-personal",
