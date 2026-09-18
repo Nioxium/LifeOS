@@ -191,7 +191,11 @@ export function buildDayPlan(state: LifeOSState, seed = 0): DayPlan {
     });
   });
 
-  const admin = ranked.find((r) => r.level !== "High" && r.task.category !== "Health");
+  const scheduled = new Set([deepWork?.task.id, second?.task.id].filter(Boolean) as string[]);
+  const admin = ranked.find(
+    (r) => !scheduled.has(r.task.id) && r.level !== "High" && r.task.category !== "Health",
+  );
+  if (admin) scheduled.add(admin.task.id);
   if (admin) {
     blocks.push({
       id: "plan-admin",
