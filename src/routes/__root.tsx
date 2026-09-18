@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -120,13 +120,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  // Page content depends on locally stored data and on "now", so it is rendered
+  // after hydration to keep the server and client markup identical.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <LifeOSProvider>
         <AppShell>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+          {hydrated ? <Outlet /> : <div className="min-h-[60vh]" />}
         </AppShell>
       </LifeOSProvider>
       <Toaster position="bottom-right" />
