@@ -16,7 +16,9 @@ import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as WeeklyPlanRouteImport } from './routes/weekly-plan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -53,9 +55,19 @@ const NotesRoute = NotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyPlanRoute = WeeklyPlanRouteImport.update({
+  id: '/weekly-plan',
+  path: '/weekly-plan',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -67,7 +79,9 @@ export interface FileRoutesByFullPath {
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/notes': typeof NotesRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +91,9 @@ export interface FileRoutesByTo {
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/notes': typeof NotesRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +104,9 @@ export interface FileRoutesById {
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/notes': typeof NotesRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/weekly-plan': typeof WeeklyPlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +118,9 @@ export interface FileRouteTypes {
     | '/goals'
     | '/habits'
     | '/notes'
+    | '/settings'
     | '/tasks'
+    | '/weekly-plan'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +130,9 @@ export interface FileRouteTypes {
     | '/goals'
     | '/habits'
     | '/notes'
+    | '/settings'
     | '/tasks'
+    | '/weekly-plan'
   id:
     | '__root__'
     | '/'
@@ -120,7 +142,9 @@ export interface FileRouteTypes {
     | '/goals'
     | '/habits'
     | '/notes'
+    | '/settings'
     | '/tasks'
+    | '/weekly-plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,7 +155,9 @@ export interface RootRouteChildren {
   GoalsRoute: typeof GoalsRoute
   HabitsRoute: typeof HabitsRoute
   NotesRoute: typeof NotesRoute
+  SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
+  WeeklyPlanRoute: typeof WeeklyPlanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,11 +211,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tasks': {
       id: '/tasks'
       path: '/tasks'
       fullPath: '/tasks'
       preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly-plan': {
+      id: '/weekly-plan'
+      path: '/weekly-plan'
+      fullPath: '/weekly-plan'
+      preLoaderRoute: typeof WeeklyPlanRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -203,7 +243,9 @@ const rootRouteChildren: RootRouteChildren = {
   GoalsRoute: GoalsRoute,
   HabitsRoute: HabitsRoute,
   NotesRoute: NotesRoute,
+  SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
+  WeeklyPlanRoute: WeeklyPlanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
