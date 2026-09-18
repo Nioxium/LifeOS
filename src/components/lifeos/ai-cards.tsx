@@ -30,7 +30,9 @@ export function AIPriorityHero({ items }: { items: ScoredTask[] }) {
                   {i + 1}
                 </span>
                 <div className="min-w-0">
-                  <p className="text-[15.5px] leading-snug font-medium text-foreground">{item.task.title}</p>
+                  <p className="text-[15.5px] leading-snug font-medium text-foreground">
+                    {item.task.title}
+                  </p>
                   <p className="mt-0.5 text-[12.5px] text-muted-foreground">
                     {item.level} impact · {item.factors[0]?.detail}
                     {item.task.estimate ? ` · ${item.task.estimate} min` : ""}

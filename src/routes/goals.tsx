@@ -16,7 +16,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { uid, useLifeOS } from "@/lib/lifeos/store";
 import type { GoalCategory } from "@/lib/lifeos/types";
@@ -28,10 +34,14 @@ export const Route = createFileRoute("/goals")({
       { title: "Goals — LifeOS" },
       {
         name: "description",
-        content: "Break ambitions into milestones, track progress and link the tasks that move them forward.",
+        content:
+          "Break ambitions into milestones, track progress and link the tasks that move them forward.",
       },
       { property: "og:title", content: "Goals — LifeOS" },
-      { property: "og:description", content: "Milestones, progress and linked tasks for every goal." },
+      {
+        property: "og:description",
+        content: "Milestones, progress and linked tasks for every goal.",
+      },
     ],
   }),
   component: GoalsPage,
@@ -39,7 +49,13 @@ export const Route = createFileRoute("/goals")({
 
 const categories: GoalCategory[] = ["Personal", "Career", "Health", "Learning", "Finance", "Other"];
 
-function NewGoalDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
+function NewGoalDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+}) {
   const { addGoal } = useLifeOS();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -61,7 +77,12 @@ function NewGoalDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o
           </div>
           <div className="grid gap-1.5">
             <Label htmlFor="goal-desc">Description</Label>
-            <Textarea id="goal-desc" rows={2} value={description} onChange={(e) => setDescription(e.target.value)} />
+            <Textarea
+              id="goal-desc"
+              rows={2}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="grid gap-1.5">
@@ -200,7 +221,9 @@ function GoalsPage() {
                     <div className="flex items-center gap-2">
                       <Tag>{goal.category}</Tag>
                       <span className="text-[12px] text-muted-foreground">
-                        {daysLeft >= 0 ? `${daysLeft} days left` : `${Math.abs(daysLeft)} days overdue`}
+                        {daysLeft >= 0
+                          ? `${daysLeft} days left`
+                          : `${Math.abs(daysLeft)} days overdue`}
                       </span>
                     </div>
                     <h2 className="mt-2 text-[18px] font-semibold tracking-tight">{goal.title}</h2>
@@ -219,7 +242,10 @@ function GoalsPage() {
                 </div>
 
                 <div className="mt-5 flex items-center gap-3">
-                  <ProgressBar value={goal.progress} tone={goal.status === "at-risk" ? "sand" : "olive"} />
+                  <ProgressBar
+                    value={goal.progress}
+                    tone={goal.status === "at-risk" ? "sand" : "olive"}
+                  />
                   <span className="w-10 text-right text-[13px] font-medium">{goal.progress}%</span>
                 </div>
 

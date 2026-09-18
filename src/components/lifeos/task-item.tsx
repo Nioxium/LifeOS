@@ -138,7 +138,10 @@ export function TaskItem({
             <DropdownMenuRadioItem value="low">Low</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-destructive focus:text-destructive" onSelect={() => deleteTask(task.id)}>
+          <DropdownMenuItem
+            className="text-destructive focus:text-destructive"
+            onSelect={() => deleteTask(task.id)}
+          >
             <Trash2 className="size-4" /> Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

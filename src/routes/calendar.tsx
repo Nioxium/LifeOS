@@ -30,7 +30,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLifeOS } from "@/lib/lifeos/store";
 import type { CalendarEvent, EventKind } from "@/lib/lifeos/types";
@@ -42,10 +48,14 @@ export const Route = createFileRoute("/calendar")({
       { title: "Calendar — LifeOS" },
       {
         name: "description",
-        content: "Month, week and day views that combine meetings, habits, personal events and task deadlines.",
+        content:
+          "Month, week and day views that combine meetings, habits, personal events and task deadlines.",
       },
       { property: "og:title", content: "Calendar — LifeOS" },
-      { property: "og:description", content: "One timeline for meetings, habits and task deadlines." },
+      {
+        property: "og:description",
+        content: "One timeline for meetings, habits and task deadlines.",
+      },
     ],
   }),
   component: CalendarPage,
@@ -109,7 +119,12 @@ function EventDialog({
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="grid gap-1.5">
               <Label htmlFor="ev-date">Date</Label>
-              <Input id="ev-date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              <Input
+                id="ev-date"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
             </div>
             <div className="grid gap-1.5">
               <Label>Type</Label>
@@ -127,7 +142,12 @@ function EventDialog({
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="ev-start">Start</Label>
-              <Input id="ev-start" type="time" value={start} onChange={(e) => setStart(e.target.value)} />
+              <Input
+                id="ev-start"
+                type="time"
+                value={start}
+                onChange={(e) => setStart(e.target.value)}
+              />
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="ev-end">End</Label>
@@ -263,7 +283,13 @@ function CalendarPage() {
             variant="ghost"
             size="icon"
             aria-label="Previous"
-            onClick={() => setCursor(view === "month" ? subMonths(cursor, 1) : addDays(cursor, view === "week" ? -7 : -1))}
+            onClick={() =>
+              setCursor(
+                view === "month"
+                  ? subMonths(cursor, 1)
+                  : addDays(cursor, view === "week" ? -7 : -1),
+              )
+            }
           >
             <ChevronLeft className="size-4" />
           </Button>
@@ -274,11 +300,19 @@ function CalendarPage() {
             variant="ghost"
             size="icon"
             aria-label="Next"
-            onClick={() => setCursor(view === "month" ? addMonths(cursor, 1) : addDays(cursor, view === "week" ? 7 : 1))}
+            onClick={() =>
+              setCursor(
+                view === "month" ? addMonths(cursor, 1) : addDays(cursor, view === "week" ? 7 : 1),
+              )
+            }
           >
             <ChevronRight className="size-4" />
           </Button>
-          <Button variant="ghost" className="rounded-full text-[13px]" onClick={() => setCursor(new Date())}>
+          <Button
+            variant="ghost"
+            className="rounded-full text-[13px]"
+            onClick={() => setCursor(new Date())}
+          >
             Today
           </Button>
         </div>
@@ -331,7 +365,9 @@ function CalendarPage() {
                     <EventChip key={e.id} event={e} />
                   ))}
                 {eventsOn(day).length > 3 ? (
-                  <p className="px-1 text-[10px] text-muted-foreground">+{eventsOn(day).length - 3} more</p>
+                  <p className="px-1 text-[10px] text-muted-foreground">
+                    +{eventsOn(day).length - 3} more
+                  </p>
                 ) : null}
               </div>
             ))}
@@ -381,7 +417,9 @@ function CalendarPage() {
                   >
                     {e.title}
                   </button>
-                  <span className="ml-auto text-[12px] text-muted-foreground capitalize">{e.kind}</span>
+                  <span className="ml-auto text-[12px] text-muted-foreground capitalize">
+                    {e.kind}
+                  </span>
                 </div>
               ))
             )}

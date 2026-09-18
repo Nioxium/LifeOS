@@ -22,7 +22,10 @@ export const Route = createFileRoute("/")({
         content:
           "LifeOS brings tasks, habits, goals, notes and calendar into one calm workspace, with an AI priority system that shows what deserves your attention today.",
       },
-      { property: "og:title", content: "LifeOS — Everything in your life, organized in one calm space" },
+      {
+        property: "og:title",
+        content: "LifeOS — Everything in your life, organized in one calm space",
+      },
       {
         property: "og:description",
         content: "A personal operating system for tasks, habits, goals, notes and your calendar.",
@@ -114,7 +117,11 @@ function Overview() {
                 title="Your day is clear 🌿"
                 description="Add something you want to accomplish today."
                 action={
-                  <Button variant="outline" className="rounded-full" onClick={() => setDialogOpen(true)}>
+                  <Button
+                    variant="outline"
+                    className="rounded-full"
+                    onClick={() => setDialogOpen(true)}
+                  >
                     Add a task
                   </Button>
                 }
@@ -139,7 +146,10 @@ function Overview() {
             title="Your habits"
             description="Small things, done often."
             action={
-              <Link to="/habits" className="ring-focus text-[13px] text-[var(--olive)] hover:underline">
+              <Link
+                to="/habits"
+                className="ring-focus text-[13px] text-[var(--olive)] hover:underline"
+              >
                 Manage
               </Link>
             }
@@ -158,14 +168,21 @@ function Overview() {
           <PanelHeader
             title="Goals"
             action={
-              <Link to="/goals" className="ring-focus text-[13px] text-[var(--olive)] hover:underline">
+              <Link
+                to="/goals"
+                className="ring-focus text-[13px] text-[var(--olive)] hover:underline"
+              >
                 All
               </Link>
             }
           />
           <div className="space-y-2.5 px-5 pb-5">
             {state.goals.slice(0, 3).map((goal, i) => (
-              <GoalCard key={goal.id} goal={goal} tone={i === 1 ? "sage" : i === 2 ? "sand" : "olive"} />
+              <GoalCard
+                key={goal.id}
+                goal={goal}
+                tone={i === 1 ? "sage" : i === 2 ? "sand" : "olive"}
+              />
             ))}
             {state.goals.length === 0 ? (
               <EmptyState
@@ -203,7 +220,10 @@ function Overview() {
           <PanelHeader
             title="Recent notes"
             action={
-              <Link to="/notes" className="ring-focus text-[13px] text-[var(--olive)] hover:underline">
+              <Link
+                to="/notes"
+                className="ring-focus text-[13px] text-[var(--olive)] hover:underline"
+              >
                 All
               </Link>
             }

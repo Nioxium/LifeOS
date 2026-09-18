@@ -10,15 +10,7 @@ import {
 } from "react";
 
 import { createDemoState } from "./demo-data";
-import type {
-  AppNotification,
-  CalendarEvent,
-  Goal,
-  Habit,
-  LifeOSState,
-  Note,
-  Task,
-} from "./types";
+import type { AppNotification, CalendarEvent, Goal, Habit, LifeOSState, Note, Task } from "./types";
 
 const STORAGE_KEY = "lifeos:v1";
 
@@ -118,7 +110,8 @@ export function LifeOSProvider({ children }: { children: ReactNode }) {
             tasks: s.tasks.map((t) => (index.has(t.id) ? { ...t, order: index.get(t.id)! } : t)),
           };
         }),
-      addHabit: (habit) => patch((s) => ({ ...s, habits: [...s.habits, { ...habit, id: uid(), completions: [] }] })),
+      addHabit: (habit) =>
+        patch((s) => ({ ...s, habits: [...s.habits, { ...habit, id: uid(), completions: [] }] })),
       toggleHabitDay: (id, day) =>
         patch((s) => ({
           ...s,
@@ -137,13 +130,13 @@ export function LifeOSProvider({ children }: { children: ReactNode }) {
       addGoal: (goal) =>
         patch((s) => ({
           ...s,
-          goals: [
-            ...s.goals,
-            recalcGoal({ ...goal, id: uid(), progress: 0, status: "on-track" }),
-          ],
+          goals: [...s.goals, recalcGoal({ ...goal, id: uid(), progress: 0, status: "on-track" })],
         })),
       updateGoal: (id, p) =>
-        patch((s) => ({ ...s, goals: s.goals.map((g) => (g.id === id ? recalcGoal({ ...g, ...p }) : g)) })),
+        patch((s) => ({
+          ...s,
+          goals: s.goals.map((g) => (g.id === id ? recalcGoal({ ...g, ...p }) : g)),
+        })),
       toggleMilestone: (goalId, milestoneId) =>
         patch((s) => ({
           ...s,
@@ -170,7 +163,9 @@ export function LifeOSProvider({ children }: { children: ReactNode }) {
       updateNote: (id, p) =>
         patch((s) => ({
           ...s,
-          notes: s.notes.map((n) => (n.id === id ? { ...n, ...p, updatedAt: new Date().toISOString() } : n)),
+          notes: s.notes.map((n) =>
+            n.id === id ? { ...n, ...p, updatedAt: new Date().toISOString() } : n,
+          ),
         })),
       deleteNote: (id) => patch((s) => ({ ...s, notes: s.notes.filter((n) => n.id !== id) })),
       addEvent: (event) => patch((s) => ({ ...s, events: [...s.events, { ...event, id: uid() }] })),

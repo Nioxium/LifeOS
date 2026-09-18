@@ -24,7 +24,8 @@ export const Route = createFileRoute("/tasks")({
       { title: "Tasks — LifeOS" },
       {
         name: "description",
-        content: "Plan, prioritise and complete your tasks with due dates, tags, estimates and goal links.",
+        content:
+          "Plan, prioritise and complete your tasks with due dates, tags, estimates and goal links.",
       },
       { property: "og:title", content: "Tasks — LifeOS" },
       { property: "og:description", content: "A calm task manager with AI-weighted priorities." },
@@ -49,7 +50,8 @@ function TasksPage() {
   const filtered = useMemo(() => {
     let list = [...state.tasks].sort((a, b) => a.order - b.order);
     if (tab === "today") list = list.filter((t) => t.dueDate === today && !t.completed);
-    if (tab === "upcoming") list = list.filter((t) => !!t.dueDate && t.dueDate > today && !t.completed);
+    if (tab === "upcoming")
+      list = list.filter((t) => !!t.dueDate && t.dueDate > today && !t.completed);
     if (tab === "completed") list = list.filter((t) => t.completed);
     if (tab === "all") list = list.filter((t) => !t.completed);
     if (priority !== "all") list = list.filter((t) => t.priority === priority);
@@ -75,8 +77,8 @@ function TasksPage() {
         <div>
           <SectionTitle>Tasks</SectionTitle>
           <p className="mt-1.5 text-[14px] text-muted-foreground">
-            {state.tasks.filter((t) => !t.completed).length} open · {state.tasks.filter((t) => t.completed).length}{" "}
-            completed
+            {state.tasks.filter((t) => !t.completed).length} open ·{" "}
+            {state.tasks.filter((t) => t.completed).length} completed
           </p>
         </div>
         <Button
@@ -135,7 +137,11 @@ function TasksPage() {
             title="Your day is clear 🌿"
             description="Add something you want to accomplish today."
             action={
-              <Button variant="outline" className="rounded-full" onClick={() => setDialogOpen(true)}>
+              <Button
+                variant="outline"
+                className="rounded-full"
+                onClick={() => setDialogOpen(true)}
+              >
                 Add a task
               </Button>
             }

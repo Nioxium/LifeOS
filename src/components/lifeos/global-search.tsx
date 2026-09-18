@@ -12,7 +12,13 @@ import {
 } from "@/components/ui/command";
 import { useLifeOS } from "@/lib/lifeos/store";
 
-export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
+export function GlobalSearch({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+}) {
   const { state } = useLifeOS();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -37,7 +43,11 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
         <CommandEmpty>Nothing matched that search.</CommandEmpty>
         <CommandGroup heading="Tasks">
           {state.tasks.slice(0, 20).map((t) => (
-            <CommandItem key={t.id} value={`task ${t.title} ${t.tags.join(" ")}`} onSelect={() => go("/tasks")}>
+            <CommandItem
+              key={t.id}
+              value={`task ${t.title} ${t.tags.join(" ")}`}
+              onSelect={() => go("/tasks")}
+            >
               <CheckSquare className="size-4 text-[var(--olive)]" />
               <span>{t.title}</span>
               <span className="ml-auto text-[11px] text-muted-foreground">{t.category}</span>
@@ -46,7 +56,11 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
         </CommandGroup>
         <CommandGroup heading="Goals">
           {state.goals.map((g) => (
-            <CommandItem key={g.id} value={`goal ${g.title} ${g.description}`} onSelect={() => go("/goals")}>
+            <CommandItem
+              key={g.id}
+              value={`goal ${g.title} ${g.description}`}
+              onSelect={() => go("/goals")}
+            >
               <Target className="size-4 text-[var(--olive)]" />
               <span>{g.title}</span>
               <span className="ml-auto text-[11px] text-muted-foreground">{g.progress}%</span>
@@ -63,7 +77,11 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
         </CommandGroup>
         <CommandGroup heading="Notes">
           {state.notes.map((n) => (
-            <CommandItem key={n.id} value={`note ${n.title} ${n.content}`} onSelect={() => go("/notes")}>
+            <CommandItem
+              key={n.id}
+              value={`note ${n.title} ${n.content}`}
+              onSelect={() => go("/notes")}
+            >
               <NotebookPen className="size-4 text-[var(--olive)]" />
               <span>{n.title}</span>
             </CommandItem>
@@ -71,7 +89,11 @@ export function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChan
         </CommandGroup>
         <CommandGroup heading="Calendar">
           {state.events.map((e) => (
-            <CommandItem key={e.id} value={`event ${e.title} ${e.date}`} onSelect={() => go("/calendar")}>
+            <CommandItem
+              key={e.id}
+              value={`event ${e.title} ${e.date}`}
+              onSelect={() => go("/calendar")}
+            >
               <CalendarDays className="size-4 text-[var(--sage)]" />
               <span>{e.title}</span>
               <span className="ml-auto text-[11px] text-muted-foreground">

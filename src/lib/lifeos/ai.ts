@@ -191,7 +191,11 @@ export function buildDayPlan(state: LifeOSState, seed = 0): DayPlan {
     });
   });
 
-  const admin = ranked.find((r) => r.level !== "High" && r.task.category !== "Health");
+  const scheduled = new Set([deepWork?.task.id, second?.task.id].filter(Boolean) as string[]);
+  const admin = ranked.find(
+    (r) => !scheduled.has(r.task.id) && r.level !== "High" && r.task.category !== "Health",
+  );
+  if (admin) scheduled.add(admin.task.id);
   if (admin) {
     blocks.push({
       id: "plan-admin",
@@ -219,7 +223,7 @@ export function buildDayPlan(state: LifeOSState, seed = 0): DayPlan {
     });
   });
 
-  const personal = ranked.find((r) => r.task.category === "Personal");
+  const personal = ranked.find((r) => !scheduled.has(r.task.id) && r.task.category === "Personal");
   if (personal) {
     blocks.push({
       id: "plan-personal",
@@ -234,9 +238,7 @@ export function buildDayPlan(state: LifeOSState, seed = 0): DayPlan {
   const order = { Morning: 0, Afternoon: 1, Evening: 2 } as const;
   blocks.sort((a, b) => order[a.period] - order[b.period] || a.time.localeCompare(b.time));
 
-  const focusMinutes = blocks
-    .filter((b) => b.kind === "focus")
-    .reduce((acc, b) => acc + 90, 0);
+  const focusMinutes = blocks.filter((b) => b.kind === "focus").reduce((acc, b) => acc + 90, 0);
 
   return {
     generatedAt: new Date().toISOString(),
@@ -288,10 +290,13 @@ export function buildWeeklyReview(state: LifeOSState): WeeklyReview {
   const completed = state.tasks.filter((t) => t.completed).length;
   const open = state.tasks.filter((t) => !t.completed).length;
   const postponed = state.tasks.filter(
-    (t) => !t.completed && t.dueDate && differenceInCalendarDays(parseISO(t.dueDate), new Date()) < 0,
+    (t) =>
+      !t.completed && t.dueDate && differenceInCalendarDays(parseISO(t.dueDate), new Date()) < 0,
   ).length;
 
-  const last7 = Array.from({ length: 7 }, (_, i) => format(new Date(Date.now() - i * 86400000), "yyyy-MM-dd"));
+  const last7 = Array.from({ length: 7 }, (_, i) =>
+    format(new Date(Date.now() - i * 86400000), "yyyy-MM-dd"),
+  );
   const possible = state.habits.length * 7;
   const done = state.habits.reduce(
     (acc, h) => acc + h.completions.filter((c) => last7.includes(c)).length,

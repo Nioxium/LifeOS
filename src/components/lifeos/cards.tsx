@@ -83,7 +83,13 @@ const statusTone: Record<Goal["status"], string> = {
   completed: "bg-[var(--olive)] text-[var(--warm-white)]",
 };
 
-export function GoalCard({ goal, tone = "olive" }: { goal: Goal; tone?: "olive" | "sage" | "sand" }) {
+export function GoalCard({
+  goal,
+  tone = "olive",
+}: {
+  goal: Goal;
+  tone?: "olive" | "sage" | "sand";
+}) {
   const { state } = useLifeOS();
   const linked = state.tasks.filter((t) => t.goalId === goal.id).length;
 
@@ -96,7 +102,8 @@ export function GoalCard({ goal, tone = "olive" }: { goal: Goal; tone?: "olive" 
         <div className="min-w-0">
           <p className="truncate text-[14.5px] font-medium text-foreground">{goal.title}</p>
           <p className="mt-1 text-[12px] text-muted-foreground">
-            {linked} linked task{linked === 1 ? "" : "s"} · due {format(parseISO(goal.deadline), "d MMM")}
+            {linked} linked task{linked === 1 ? "" : "s"} · due{" "}
+            {format(parseISO(goal.deadline), "d MMM")}
           </p>
         </div>
         <span
@@ -110,7 +117,9 @@ export function GoalCard({ goal, tone = "olive" }: { goal: Goal; tone?: "olive" 
       </div>
       <div className="mt-3.5 flex items-center gap-3">
         <ProgressBar value={goal.progress} tone={tone} />
-        <span className="w-9 shrink-0 text-right text-[12px] font-medium text-foreground">{goal.progress}%</span>
+        <span className="w-9 shrink-0 text-right text-[12px] font-medium text-foreground">
+          {goal.progress}%
+        </span>
       </div>
     </Link>
   );
@@ -126,11 +135,15 @@ const eventTone: Record<CalendarEvent["kind"], string> = {
 export function EventRow({ event }: { event: CalendarEvent }) {
   return (
     <div className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-[var(--ivory)]">
-      <span className="w-[52px] shrink-0 text-[12px] tabular-nums text-muted-foreground">{event.start}</span>
+      <span className="w-[52px] shrink-0 text-[12px] tabular-nums text-muted-foreground">
+        {event.start}
+      </span>
       <span className={cn("h-7 w-[3px] shrink-0 rounded-full", eventTone[event.kind])} />
       <div className="min-w-0">
         <p className="truncate text-[14px] text-foreground">{event.title}</p>
-        {event.location ? <p className="text-[11px] text-muted-foreground">{event.location}</p> : null}
+        {event.location ? (
+          <p className="text-[11px] text-muted-foreground">{event.location}</p>
+        ) : null}
       </div>
     </div>
   );
@@ -153,7 +166,9 @@ export function NoteCard({ note, onClick }: { note: Note; onClick?: (() => void)
       className="surface-hover ring-focus w-full rounded-xl border border-border bg-card px-4 py-3.5 text-left"
     >
       <p className="text-[14.5px] font-medium text-foreground">{note.title}</p>
-      <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">{note.content}</p>
+      <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+        {note.content}
+      </p>
       <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
         {note.tags.slice(0, 3).map((t) => (
           <Tag key={t}>{t}</Tag>

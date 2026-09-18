@@ -141,11 +141,21 @@ export function TaskDialog({
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="task-date">Due date</Label>
-              <Input id="task-date" type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+              <Input
+                id="task-date"
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+              />
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="task-time">Due time</Label>
-              <Input id="task-time" type="time" value={dueTime} onChange={(e) => setDueTime(e.target.value)} />
+              <Input
+                id="task-time"
+                type="time"
+                value={dueTime}
+                onChange={(e) => setDueTime(e.target.value)}
+              />
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="task-estimate">Estimate (min)</Label>

@@ -90,8 +90,7 @@ export function ProgressBar({
   tone?: "olive" | "sage" | "sand";
   className?: string;
 }) {
-  const color =
-    tone === "olive" ? "var(--olive)" : tone === "sage" ? "var(--sage)" : "var(--sand)";
+  const color = tone === "olive" ? "var(--olive)" : tone === "sage" ? "var(--sage)" : "var(--sand)";
   return (
     <div className={cn("h-1.5 w-full overflow-hidden rounded-full bg-[var(--ivory)]", className)}>
       <div
