@@ -161,7 +161,7 @@ export function createDemoState(): LifeOSState {
         goalPerWeek: 5,
         reminder: true,
         startDate: past(60),
-        completions: streak(14, [3, 9]),
+        completions: streak(14, [12, 13]),
       },
       {
         id: "h2",
@@ -172,7 +172,7 @@ export function createDemoState(): LifeOSState {
         goalPerWeek: 7,
         reminder: true,
         startDate: past(90),
-        completions: streak(21, [2, 5, 11, 16]),
+        completions: streak(21, [8, 14, 16]),
       },
       {
         id: "h3",
@@ -183,7 +183,7 @@ export function createDemoState(): LifeOSState {
         goalPerWeek: 7,
         reminder: false,
         startDate: past(45),
-        completions: streak(10, [4]),
+        completions: streak(10, [9]),
       },
       {
         id: "h4",
@@ -194,7 +194,7 @@ export function createDemoState(): LifeOSState {
         goalPerWeek: 5,
         reminder: true,
         startDate: past(30),
-        completions: streak(12, [1, 3, 6, 8]),
+        completions: streak(12, [4, 8, 10]),
       },
       {
         id: "h5",
@@ -205,7 +205,7 @@ export function createDemoState(): LifeOSState {
         goalPerWeek: 5,
         reminder: false,
         startDate: past(25),
-        completions: streak(9, [2, 3, 7]),
+        completions: streak(9, [5, 7]),
       },
     ],
     goals: [
