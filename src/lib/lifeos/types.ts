@@ -86,7 +86,7 @@ export interface AppNotification {
 }
 
 export interface LifeOSState {
-  user: { name: string; initials: string; email: string };
+  user: { name: string; initials: string; email: string; avatar?: string };
   tasks: Task[];
   habits: Habit[];
   goals: Goal[];

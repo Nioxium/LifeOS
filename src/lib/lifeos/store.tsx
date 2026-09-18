@@ -40,6 +40,7 @@ interface LifeOSContextValue {
   deleteEvent: (id: string) => void;
   markNotificationsRead: () => void;
   pushNotification: (n: Omit<AppNotification, "id" | "read" | "time">) => void;
+  updateUser: (patch: Partial<LifeOSState["user"]>) => void;
   resetDemo: () => void;
 }
 
@@ -179,6 +180,8 @@ export function LifeOSProvider({ children }: { children: ReactNode }) {
           ...s,
           notifications: [{ ...n, id: uid(), read: false, time: "now" }, ...s.notifications],
         })),
+      updateUser: (patch) =>
+        setState((s) => ({ ...s, user: { ...s.user, ...patch } })),
       resetDemo: () => setState(createDemoState()),
     };
   }, [state, hydrated, patch]);
