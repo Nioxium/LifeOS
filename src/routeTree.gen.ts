@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AiPlannerRouteImport } from './routes/ai-planner'
+import { Route as AiPrioritiesRouteImport } from './routes/ai-priorities'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as HabitsRouteImport } from './routes/habits'
@@ -19,6 +21,16 @@ import { Route as TasksRouteImport } from './routes/tasks'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiPlannerRoute = AiPlannerRouteImport.update({
+  id: '/ai-planner',
+  path: '/ai-planner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiPrioritiesRoute = AiPrioritiesRouteImport.update({
+  id: '/ai-priorities',
+  path: '/ai-priorities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -49,6 +61,8 @@ const TasksRoute = TasksRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-planner': typeof AiPlannerRoute
+  '/ai-priorities': typeof AiPrioritiesRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
@@ -57,6 +71,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-planner': typeof AiPlannerRoute
+  '/ai-priorities': typeof AiPrioritiesRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
@@ -66,6 +82,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai-planner': typeof AiPlannerRoute
+  '/ai-priorities': typeof AiPrioritiesRoute
   '/calendar': typeof CalendarRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
@@ -74,15 +92,41 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/goals' | '/habits' | '/notes' | '/tasks'
+  fullPaths:
+    | '/'
+    | '/ai-planner'
+    | '/ai-priorities'
+    | '/calendar'
+    | '/goals'
+    | '/habits'
+    | '/notes'
+    | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/goals' | '/habits' | '/notes' | '/tasks'
+  to:
+    | '/'
+    | '/ai-planner'
+    | '/ai-priorities'
+    | '/calendar'
+    | '/goals'
+    | '/habits'
+    | '/notes'
+    | '/tasks'
   id:
-    '__root__' | '/' | '/calendar' | '/goals' | '/habits' | '/notes' | '/tasks'
+    | '__root__'
+    | '/'
+    | '/ai-planner'
+    | '/ai-priorities'
+    | '/calendar'
+    | '/goals'
+    | '/habits'
+    | '/notes'
+    | '/tasks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiPlannerRoute: typeof AiPlannerRoute
+  AiPrioritiesRoute: typeof AiPrioritiesRoute
   CalendarRoute: typeof CalendarRoute
   GoalsRoute: typeof GoalsRoute
   HabitsRoute: typeof HabitsRoute
@@ -97,6 +141,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-planner': {
+      id: '/ai-planner'
+      path: '/ai-planner'
+      fullPath: '/ai-planner'
+      preLoaderRoute: typeof AiPlannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-priorities': {
+      id: '/ai-priorities'
+      path: '/ai-priorities'
+      fullPath: '/ai-priorities'
+      preLoaderRoute: typeof AiPrioritiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -139,6 +197,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiPlannerRoute: AiPlannerRoute,
+  AiPrioritiesRoute: AiPrioritiesRoute,
   CalendarRoute: CalendarRoute,
   GoalsRoute: GoalsRoute,
   HabitsRoute: HabitsRoute,
