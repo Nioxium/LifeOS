@@ -15,7 +15,8 @@ export const Route = createFileRoute("/weekly-plan")({
       { title: "Weekly Plan — LifeOS" },
       {
         name: "description",
-        content: "A balanced week: your highest-leverage work spread across the days, with review insights to guide it.",
+        content:
+          "A balanced week: your highest-leverage work spread across the days, with review insights to guide it.",
       },
       { property: "og:title", content: "Weekly Plan — LifeOS" },
       { property: "og:description", content: "Spread your priorities across a balanced week." },
@@ -33,7 +34,15 @@ function WeeklyPlanPage() {
   const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
   // Spread the ranked work across the week, heaviest first, lighter on Monday.
-  const buckets: Record<number, typeof ranked> = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+  const buckets: Record<number, typeof ranked> = {
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  };
   ranked.forEach((item, i) => {
     const dayIndex = [1, 2, 0, 3, 4, 1, 2, 3][i % 8] ?? 0;
     buckets[dayIndex]?.push(item);
@@ -44,7 +53,8 @@ function WeeklyPlanPage() {
       <header className="pt-2">
         <SectionTitle>Weekly plan</SectionTitle>
         <p className="mt-1.5 max-w-2xl text-[14.5px] text-muted-foreground">
-          Week of {format(weekStart, "d MMM")} — shaped around your priorities, with Monday deliberately lighter.
+          Week of {format(weekStart, "d MMM")} — shaped around your priorities, with Monday
+          deliberately lighter.
         </p>
       </header>
 
@@ -57,11 +67,16 @@ function WeeklyPlanPage() {
       </div>
 
       <Panel>
-        <PanelHeader title="Next week at a glance" description="Drag-free draft — accept it in the AI Planner." />
+        <PanelHeader
+          title="Next week at a glance"
+          description="Drag-free draft — accept it in the AI Planner."
+        />
         <div className="grid gap-px overflow-hidden bg-border px-0 pb-0 sm:grid-cols-7">
           {days.map((day, i) => (
             <div key={day.toISOString()} className="min-h-[180px] bg-card p-3">
-              <p className="mb-2 text-[12px] font-medium text-muted-foreground">{format(day, "EEE d")}</p>
+              <p className="mb-2 text-[12px] font-medium text-muted-foreground">
+                {format(day, "EEE d")}
+              </p>
               <div className="space-y-1.5">
                 {(buckets[i] ?? []).slice(0, 4).map((item) => (
                   <div

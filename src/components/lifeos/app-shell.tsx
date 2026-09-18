@@ -78,7 +78,12 @@ function NavItem({
           : "text-[color-mix(in_oklch,var(--sand)_78%,transparent)] hover:bg-[oklch(0.38_0.026_123)] hover:text-[var(--warm-white)]",
       )}
     >
-      <Icon className={cn("size-[18px] transition-transform duration-200", !active && "group-hover:scale-105")} />
+      <Icon
+        className={cn(
+          "size-[18px] transition-transform duration-200",
+          !active && "group-hover:scale-105",
+        )}
+      />
       {label}
     </Link>
   );
@@ -94,7 +99,9 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         <span className="flex size-8 items-center justify-center rounded-lg bg-[var(--olive)]">
           <Leaf className="size-4 text-[var(--warm-white)]" />
         </span>
-        <span className="text-[17px] font-semibold tracking-tight text-[var(--warm-white)]">LifeOS</span>
+        <span className="text-[17px] font-semibold tracking-tight text-[var(--warm-white)]">
+          LifeOS
+        </span>
       </div>
 
       <nav className="mt-8 flex flex-1 flex-col gap-1">
@@ -124,7 +131,9 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             {state.user.initials}
           </span>
           <div className="min-w-0">
-            <p className="truncate text-[13px] font-medium text-[var(--warm-white)]">{state.user.name}</p>
+            <p className="truncate text-[13px] font-medium text-[var(--warm-white)]">
+              {state.user.name}
+            </p>
             <p className="truncate text-[11px] text-[color-mix(in_oklch,var(--sand)_65%,transparent)]">
               {state.user.email}
             </p>
@@ -142,7 +151,12 @@ function Notifications() {
   return (
     <DropdownMenu onOpenChange={(o) => o && unread > 0 && markNotificationsRead()}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative rounded-full" aria-label="Notifications">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative rounded-full"
+          aria-label="Notifications"
+        >
           <Bell className="size-[18px]" />
           {unread > 0 ? (
             <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-[var(--olive)]" />
@@ -153,10 +167,15 @@ function Notifications() {
         <DropdownMenuLabel className="px-3 text-[13px]">Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {state.notifications.length === 0 ? (
-          <p className="px-3 py-6 text-center text-[13px] text-muted-foreground">You're all caught up.</p>
+          <p className="px-3 py-6 text-center text-[13px] text-muted-foreground">
+            You're all caught up.
+          </p>
         ) : (
           state.notifications.slice(0, 6).map((n) => (
-            <DropdownMenuItem key={n.id} className="flex-col items-start gap-0.5 rounded-xl px-3 py-2.5">
+            <DropdownMenuItem
+              key={n.id}
+              className="flex-col items-start gap-0.5 rounded-xl px-3 py-2.5"
+            >
               <span className="text-[13px] font-medium">{n.title}</span>
               <span className="text-[12px] text-muted-foreground">{n.body}</span>
               <span className="text-[11px] text-[var(--sage)]">{n.time}</span>
@@ -195,7 +214,12 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-border bg-[color-mix(in_oklch,var(--ivory)_86%,transparent)] px-4 backdrop-blur-md sm:px-6 lg:px-10">
           <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open navigation">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                aria-label="Open navigation"
+              >
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
@@ -212,7 +236,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             <Search className="size-4" />
             <span className="truncate">Search everything…</span>
-            <kbd className="ml-auto hidden rounded border border-border px-1.5 py-0.5 text-[10px] sm:inline">⌘K</kbd>
+            <kbd className="ml-auto hidden rounded border border-border px-1.5 py-0.5 text-[10px] sm:inline">
+              ⌘K
+            </kbd>
           </button>
 
           <div className="ml-auto flex items-center gap-1">
@@ -227,7 +253,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="mx-auto w-full max-w-[1280px] px-4 pt-6 pb-28 sm:px-6 lg:px-10 lg:pb-14">{children}</main>
+        <main className="mx-auto w-full max-w-[1280px] px-4 pt-6 pb-28 sm:px-6 lg:px-10 lg:pb-14">
+          {children}
+        </main>
       </div>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-[color-mix(in_oklch,var(--warm-white)_94%,transparent)] backdrop-blur-md lg:hidden">

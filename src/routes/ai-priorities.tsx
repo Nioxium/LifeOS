@@ -4,7 +4,12 @@ import { useMemo } from "react";
 
 import { ScoreMeter } from "@/components/lifeos/ai-cards";
 import { EmptyState, Panel, PanelHeader, SectionTitle } from "@/components/lifeos/primitives";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { rankTasks } from "@/lib/lifeos/ai";
 import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
@@ -40,7 +45,8 @@ function AIPrioritiesPage() {
       <header className="pt-2">
         <SectionTitle>AI Priorities</SectionTitle>
         <p className="mt-1.5 max-w-2xl text-[14.5px] text-muted-foreground">
-          Every open task, scored and explained. Nothing is hidden — open a task to see the factors behind its rank.
+          Every open task, scored and explained. Nothing is hidden — open a task to see the factors
+          behind its rank.
         </p>
       </header>
 
@@ -51,15 +57,22 @@ function AIPrioritiesPage() {
         />
         <div className="px-4 pb-4">
           {ranked.length === 0 ? (
-            <EmptyState title="Nothing to rank" description="Add a task and LifeOS will weigh it for you." />
+            <EmptyState
+              title="Nothing to rank"
+              description="Add a task and LifeOS will weigh it for you."
+            />
           ) : (
             <Accordion type="single" collapsible className="w-full">
               {ranked.map((item, i) => (
                 <AccordionItem key={item.task.id} value={item.task.id} className="border-border">
                   <AccordionTrigger className="px-2 hover:no-underline">
                     <div className="flex w-full items-center gap-3 pr-3 text-left">
-                      <span className="w-5 shrink-0 text-[12px] tabular-nums text-muted-foreground">{i + 1}</span>
-                      <span className="min-w-0 flex-1 truncate text-[14.5px] font-medium">{item.task.title}</span>
+                      <span className="w-5 shrink-0 text-[12px] tabular-nums text-muted-foreground">
+                        {i + 1}
+                      </span>
+                      <span className="min-w-0 flex-1 truncate text-[14.5px] font-medium">
+                        {item.task.title}
+                      </span>
                       <span
                         className={cn(
                           "hidden shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium sm:inline",
@@ -79,7 +92,9 @@ function AIPrioritiesPage() {
                     <ul className="space-y-2.5">
                       {item.factors.map((f) => (
                         <li key={f.label} className="flex items-center gap-3">
-                          <span className="w-40 shrink-0 text-[12.5px] text-foreground">{f.label}</span>
+                          <span className="w-40 shrink-0 text-[12.5px] text-foreground">
+                            {f.label}
+                          </span>
                           <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[var(--ivory)]">
                             <div
                               className="h-full rounded-full bg-[var(--sage)] transition-[width] duration-700"
@@ -101,8 +116,8 @@ function AIPrioritiesPage() {
       </Panel>
 
       <p className="text-[12px] leading-relaxed text-muted-foreground">
-        Scores come from a transparent local scoring model, not a hosted AI service. The service layer is isolated so a
-        real model can be connected later without changing this page.
+        Scores come from a transparent local scoring model, not a hosted AI service. The service
+        layer is isolated so a real model can be connected later without changing this page.
       </p>
     </div>
   );

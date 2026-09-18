@@ -5,7 +5,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { HabitCard } from "@/components/lifeos/cards";
-import { EmptyState, Panel, PanelHeader, SectionTitle, StatTile } from "@/components/lifeos/primitives";
+import {
+  EmptyState,
+  Panel,
+  PanelHeader,
+  SectionTitle,
+  StatTile,
+} from "@/components/lifeos/primitives";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,7 +23,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { bestStreak, currentStreak } from "@/lib/lifeos/ai";
 import { useLifeOS } from "@/lib/lifeos/store";
@@ -30,10 +42,14 @@ export const Route = createFileRoute("/habits")({
       { title: "Habits — LifeOS" },
       {
         name: "description",
-        content: "Track streaks, weekly completion and monthly consistency for the routines that matter.",
+        content:
+          "Track streaks, weekly completion and monthly consistency for the routines that matter.",
       },
       { property: "og:title", content: "Habits — LifeOS" },
-      { property: "og:description", content: "Streaks, weekly completion and a calm consistency heatmap." },
+      {
+        property: "og:description",
+        content: "Streaks, weekly completion and a calm consistency heatmap.",
+      },
     ],
   }),
   component: HabitsPage,
@@ -54,7 +70,11 @@ function Heatmap({ habit }: { habit: Habit }) {
             title={`${format(d, "d MMM")}${done ? " · done" : ""}`}
             className={cn(
               "size-4 rounded-[4px] border border-border transition-colors",
-              done ? "border-transparent bg-[var(--olive)]" : future ? "bg-[var(--ivory)]" : "bg-[var(--sand)]/35",
+              done
+                ? "border-transparent bg-[var(--olive)]"
+                : future
+                  ? "bg-[var(--ivory)]"
+                  : "bg-[var(--sand)]/35",
             )}
           />
         );
@@ -63,7 +83,13 @@ function Heatmap({ habit }: { habit: Habit }) {
   );
 }
 
-function NewHabitDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
+function NewHabitDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+}) {
   const { addHabit } = useLifeOS();
   const [name, setName] = useState("");
   const [frequency, setFrequency] = useState<HabitFrequency>("daily");
@@ -82,7 +108,12 @@ function NewHabitDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (
         <div className="grid gap-4">
           <div className="grid gap-1.5">
             <Label htmlFor="habit-name">Habit name</Label>
-            <Input id="habit-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Morning walk" />
+            <Input
+              id="habit-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Morning walk"
+            />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="grid gap-1.5">
@@ -184,7 +215,10 @@ function HabitsPage() {
   const last30 = Array.from({ length: 30 }, (_, i) => format(subDays(new Date(), i), "yyyy-MM-dd"));
   const monthly = state.habits.length
     ? Math.round(
-        (state.habits.reduce((acc, h) => acc + h.completions.filter((c) => last30.includes(c)).length, 0) /
+        (state.habits.reduce(
+          (acc, h) => acc + h.completions.filter((c) => last30.includes(c)).length,
+          0,
+        ) /
           (state.habits.length * 30)) *
           100,
       )
@@ -217,7 +251,11 @@ function HabitsPage() {
       </header>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatTile label="Current streak" value={`${topStreak} days`} hint="Your strongest active habit" />
+        <StatTile
+          label="Current streak"
+          value={`${topStreak} days`}
+          hint="Your strongest active habit"
+        />
         <StatTile label="Weekly completion" value={`${week}%`} hint="Across all habits" />
         <StatTile label="Monthly consistency" value={`${monthly}%`} hint="Last 30 days" />
         <StatTile label="Best streak" value={`${allTimeBest} days`} hint="All time" />

@@ -34,7 +34,9 @@ function SettingsPage() {
     <div className="space-y-6">
       <header className="pt-2">
         <SectionTitle>Settings</SectionTitle>
-        <p className="mt-1.5 text-[14px] text-muted-foreground">Make LifeOS fit the way you work.</p>
+        <p className="mt-1.5 text-[14px] text-muted-foreground">
+          Make LifeOS fit the way you work.
+        </p>
       </header>
 
       <Panel>

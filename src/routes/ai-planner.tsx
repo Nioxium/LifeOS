@@ -84,7 +84,10 @@ function AIPlannerPage() {
             className="rounded-full"
             onClick={() => {
               setAccepted(true);
-              pushNotification({ title: "AI plan accepted", body: "Today's plan is now your schedule." });
+              pushNotification({
+                title: "AI plan accepted",
+                body: "Today's plan is now your schedule.",
+              });
               toast.success("Plan accepted for today");
             }}
           >
@@ -106,7 +109,9 @@ function AIPlannerPage() {
             {[0, 1, 2, 3].map((i) => (
               <div key={i} className="animate-ai-thinking h-12 rounded-xl" />
             ))}
-            <p className="pt-1 text-[13px] text-muted-foreground">Weighing deadlines, goals and free time…</p>
+            <p className="pt-1 text-[13px] text-muted-foreground">
+              Weighing deadlines, goals and free time…
+            </p>
           </div>
         ) : (
           <div className="mt-6 space-y-7">
@@ -115,23 +120,34 @@ function AIPlannerPage() {
               if (!blocks.length) return null;
               return (
                 <div key={period} className="animate-leaf-in">
-                  <p className="mb-3 text-[12px] tracking-[0.12em] text-[var(--sage)] uppercase">{period}</p>
+                  <p className="mb-3 text-[12px] tracking-[0.12em] text-[var(--sage)] uppercase">
+                    {period}
+                  </p>
                   <div className="space-y-2.5">
                     {blocks.map((b) => (
                       <div
                         key={b.id}
                         className="flex gap-3 rounded-xl border border-border bg-[var(--ivory)]/50 px-4 py-3"
                       >
-                        <span className={cn("mt-1 h-full min-h-9 w-[3px] shrink-0 rounded-full", kindTone[b.kind])} />
+                        <span
+                          className={cn(
+                            "mt-1 h-full min-h-9 w-[3px] shrink-0 rounded-full",
+                            kindTone[b.kind],
+                          )}
+                        />
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-baseline gap-x-3">
                             <p className="text-[14.5px] font-medium text-foreground">{b.title}</p>
-                            <span className="text-[12px] tabular-nums text-muted-foreground">{b.time}</span>
+                            <span className="text-[12px] tabular-nums text-muted-foreground">
+                              {b.time}
+                            </span>
                           </div>
                           <p className="mt-0.5 text-[12.5px] text-muted-foreground">{b.detail}</p>
                           {b.why ? (
                             <p className="mt-2 rounded-lg border border-[color-mix(in_oklch,var(--sage)_45%,var(--border))] bg-[color-mix(in_oklch,var(--sage)_10%,transparent)] px-3 py-2 text-[12.5px] leading-relaxed text-muted-foreground">
-                              <span className="font-medium text-foreground">Why this comes first — </span>
+                              <span className="font-medium text-foreground">
+                                Why this comes first —{" "}
+                              </span>
                               {b.why}
                             </p>
                           ) : null}
@@ -146,9 +162,9 @@ function AIPlannerPage() {
         )}
 
         <p className="mt-6 border-t border-border pt-4 text-[12px] leading-relaxed text-muted-foreground">
-          This plan is produced by LifeOS's built-in scheduling heuristics — deadlines, goal weight, your stated
-          priority, calendar availability and estimated effort. It runs locally today and is built so a hosted AI model
-          can be connected later without changing the experience.
+          This plan is produced by LifeOS's built-in scheduling heuristics — deadlines, goal weight,
+          your stated priority, calendar availability and estimated effort. It runs locally today
+          and is built so a hosted AI model can be connected later without changing the experience.
         </p>
       </Panel>
 
@@ -176,7 +192,9 @@ function AIPlannerPage() {
           {review.insights.map((insight, i) => (
             <AIInsightCard
               key={insight}
-              title={i === 0 ? "Completion" : i === 1 ? "Consistency" : i === 2 ? "Load" : "Leverage"}
+              title={
+                i === 0 ? "Completion" : i === 1 ? "Consistency" : i === 2 ? "Load" : "Leverage"
+              }
               body={insight}
               tone={i % 2 === 0 ? "sage" : "sand"}
             />

@@ -19,7 +19,8 @@ export const Route = createFileRoute("/notes")({
       { title: "Notes — LifeOS" },
       {
         name: "description",
-        content: "A quiet place for ideas, reading lists and thinking — with tags, search and a distraction-free editor.",
+        content:
+          "A quiet place for ideas, reading lists and thinking — with tags, search and a distraction-free editor.",
       },
       { property: "og:title", content: "Notes — LifeOS" },
       { property: "og:description", content: "Capture ideas in a calm, distraction-free editor." },
