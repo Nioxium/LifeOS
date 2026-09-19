@@ -128,8 +128,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
           onNavigate={onNavigate}
         />
         <div className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2">
-          <span className="flex size-8 items-center justify-center rounded-full bg-[var(--sage)] text-[12px] font-semibold text-[var(--olive-deep)]">
-            {state.user.initials}
+          <span className="flex size-8 items-center justify-center overflow-hidden rounded-full bg-[var(--sage)] text-[12px] font-semibold text-[var(--olive-deep)]">
+            {state.user.avatar ? (
+              <img src={state.user.avatar} alt="" className="size-full object-cover" />
+            ) : (
+              state.user.initials
+            )}
           </span>
           <div className="min-w-0">
             <p className="truncate text-[13px] font-medium text-[var(--warm-white)]">
@@ -243,6 +247,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  if (pathname.startsWith("/auth")) return <>{children}</>;
 
   return (
     <div className="min-h-screen bg-background">
