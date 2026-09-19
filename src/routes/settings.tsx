@@ -88,7 +88,7 @@ function SettingsPage() {
                 <Button
                   variant="ghost"
                   className="h-9 rounded-full text-[13px]"
-                  onClick={() => updateUser({ avatar: undefined })}
+                  onClick={() => updateUser({ avatar: "" })}
                 >
                   Remove
                 </Button>
