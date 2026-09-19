@@ -63,7 +63,7 @@ function AuthPage() {
         updateUser({ email: email.trim() });
       }
       toast.success(label);
-      void navigate({ to: "/" as never });
+      void navigate({ to: "/dashboard" as never });
     }, 700);
   };
 
