@@ -14,6 +14,7 @@ import { Route as AiPlannerRouteImport } from './routes/ai-planner'
 import { Route as AiPrioritiesRouteImport } from './routes/ai-priorities'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CalendarRouteImport } from './routes/calendar'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as NotesRouteImport } from './routes/notes'
@@ -44,6 +45,11 @@ const AuthRoute = AuthRouteImport.update({
 const CalendarRoute = CalendarRouteImport.update({
   id: '/calendar',
   path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GoalsRoute = GoalsRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/ai-priorities': typeof AiPrioritiesRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/notes': typeof NotesRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/ai-priorities': typeof AiPrioritiesRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/notes': typeof NotesRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/ai-priorities': typeof AiPrioritiesRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
   '/notes': typeof NotesRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/ai-priorities'
     | '/auth'
     | '/calendar'
+    | '/dashboard'
     | '/goals'
     | '/habits'
     | '/notes'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/ai-priorities'
     | '/auth'
     | '/calendar'
+    | '/dashboard'
     | '/goals'
     | '/habits'
     | '/notes'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/ai-priorities'
     | '/auth'
     | '/calendar'
+    | '/dashboard'
     | '/goals'
     | '/habits'
     | '/notes'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   AiPrioritiesRoute: typeof AiPrioritiesRoute
   AuthRoute: typeof AuthRoute
   CalendarRoute: typeof CalendarRoute
+  DashboardRoute: typeof DashboardRoute
   GoalsRoute: typeof GoalsRoute
   HabitsRoute: typeof HabitsRoute
   NotesRoute: typeof NotesRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/calendar'
       fullPath: '/calendar'
       preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/goals': {
@@ -261,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiPrioritiesRoute: AiPrioritiesRoute,
   AuthRoute: AuthRoute,
   CalendarRoute: CalendarRoute,
+  DashboardRoute: DashboardRoute,
   GoalsRoute: GoalsRoute,
   HabitsRoute: HabitsRoute,
   NotesRoute: NotesRoute,

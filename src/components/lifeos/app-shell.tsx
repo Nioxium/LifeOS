@@ -33,7 +33,7 @@ import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
 
 const primaryNav = [
-  { to: "/", label: "Overview", icon: LayoutGrid },
+  { to: "/dashboard", label: "Overview", icon: LayoutGrid },
   { to: "/tasks", label: "Tasks", icon: CheckSquare },
   { to: "/habits", label: "Habits", icon: Flame },
   { to: "/goals", label: "Goals", icon: Target },
@@ -48,7 +48,7 @@ const aiNav = [
 ] as const;
 
 const mobileNav = [
-  { to: "/", label: "Home", icon: LayoutGrid },
+  { to: "/dashboard", label: "Home", icon: LayoutGrid },
   { to: "/tasks", label: "Tasks", icon: CheckSquare },
   { to: "/ai-planner", label: "Plan", icon: Wand2 },
   { to: "/habits", label: "Habits", icon: Flame },
@@ -248,7 +248,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  if (pathname.startsWith("/auth")) return <>{children}</>;
+  if (pathname === "/" || pathname.startsWith("/auth")) return <>{children}</>;
 
   return (
     <div className="min-h-screen bg-background">
