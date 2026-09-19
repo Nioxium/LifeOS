@@ -25,10 +25,34 @@ export const Route = createFileRoute("/settings")({
 });
 
 function SettingsPage() {
-  const { state, resetDemo } = useLifeOS();
+  const { state, resetDemo, updateUser } = useLifeOS();
   const [reminders, setReminders] = useState(true);
   const [weeklyEmail, setWeeklyEmail] = useState(false);
   const [autoPlan, setAutoPlan] = useState(true);
+  const [name, setName] = useState(state.user.name);
+  const [email, setEmail] = useState(state.user.email);
+
+  const onAvatar = (file: File | undefined) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      updateUser({ avatar: String(reader.result) });
+      toast.success("Photo updated");
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const saveProfile = () => {
+    const initials =
+      name
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map((p) => p[0]?.toUpperCase() ?? "")
+        .join("") || state.user.initials;
+    updateUser({ name: name.trim() || state.user.name, email: email.trim(), initials });
+    toast.success("Profile saved");
+  };
 
   return (
     <div className="space-y-6">
