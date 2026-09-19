@@ -64,16 +64,57 @@ function SettingsPage() {
       </header>
 
       <Panel>
-        <PanelHeader title="Profile" />
-        <div className="grid gap-4 px-6 pb-6 sm:grid-cols-2">
-          <div className="grid gap-1.5">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" defaultValue={state.user.name} />
+        <PanelHeader title="Profile" description="How you appear across LifeOS." />
+        <div className="space-y-4 px-6 pb-6">
+          <div className="flex items-center gap-4">
+            <span className="flex size-16 items-center justify-center overflow-hidden rounded-full bg-[var(--sand)] text-[18px] font-semibold text-[var(--olive-deep)]">
+              {state.user.avatar ? (
+                <img src={state.user.avatar} alt="" className="size-full object-cover" />
+              ) : (
+                state.user.initials
+              )}
+            </span>
+            <div className="flex flex-wrap gap-2">
+              <label className="ring-focus inline-flex h-9 cursor-pointer items-center rounded-full border border-border bg-card px-4 text-[13px] font-medium transition-colors hover:bg-accent">
+                Upload photo
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => onAvatar(e.target.files?.[0])}
+                />
+              </label>
+              {state.user.avatar ? (
+                <Button
+                  variant="ghost"
+                  className="h-9 rounded-full text-[13px]"
+                  onClick={() => updateUser({ avatar: undefined })}
+                >
+                  Remove
+                </Button>
+              ) : null}
+            </div>
           </div>
-          <div className="grid gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" defaultValue={state.user.email} />
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-1.5">
+              <Label htmlFor="name">Display name</Label>
+              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div className="grid gap-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
           </div>
+
+          <Button className="rounded-full" onClick={saveProfile}>
+            Save profile
+          </Button>
         </div>
       </Panel>
 
