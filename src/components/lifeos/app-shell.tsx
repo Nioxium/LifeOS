@@ -187,9 +187,48 @@ function Notifications() {
   );
 }
 
+function ProfileMenu() {
+  const { state } = useLifeOS();
+  const navigate = useNavigate();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          aria-label="Profile"
+          className="ring-focus ml-1 flex size-9 items-center justify-center overflow-hidden rounded-full bg-[var(--sand)] text-[12px] font-semibold text-[var(--olive-deep)] transition-transform hover:scale-105"
+        >
+          {state.user.avatar ? (
+            <img src={state.user.avatar} alt="" className="size-full object-cover" />
+          ) : (
+            state.user.initials
+          )}
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-60 rounded-2xl p-2">
+        <DropdownMenuLabel className="px-3 py-2">
+          <p className="text-[13.5px] font-medium">{state.user.name}</p>
+          <p className="text-[12px] font-normal text-muted-foreground">{state.user.email}</p>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="rounded-xl px-3 py-2" asChild>
+          <Link to={"/settings" as never}>Profile & settings</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="rounded-xl px-3 py-2"
+          onSelect={() => void navigate({ to: "/auth" as never })}
+        >
+          <LogOut className="size-4" />
+          Sign out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { state } = useLifeOS();
   const [searchOpen, setSearchOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
