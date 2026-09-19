@@ -180,8 +180,7 @@ export function LifeOSProvider({ children }: { children: ReactNode }) {
           ...s,
           notifications: [{ ...n, id: uid(), read: false, time: "now" }, ...s.notifications],
         })),
-      updateUser: (patch) =>
-        setState((s) => ({ ...s, user: { ...s.user, ...patch } })),
+      updateUser: (patch) => setState((s) => ({ ...s, user: { ...s.user, ...patch } })),
       resetDemo: () => setState(createDemoState()),
     };
   }, [state, hydrated, patch]);

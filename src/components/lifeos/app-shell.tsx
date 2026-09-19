@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   Bell,
   CalendarDays,
@@ -6,6 +6,7 @@ import {
   Flame,
   LayoutGrid,
   Leaf,
+  LogOut,
   Menu,
   NotebookPen,
   Search,
@@ -127,8 +128,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
           onNavigate={onNavigate}
         />
         <div className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2">
-          <span className="flex size-8 items-center justify-center rounded-full bg-[var(--sage)] text-[12px] font-semibold text-[var(--olive-deep)]">
-            {state.user.initials}
+          <span className="flex size-8 items-center justify-center overflow-hidden rounded-full bg-[var(--sage)] text-[12px] font-semibold text-[var(--olive-deep)]">
+            {state.user.avatar ? (
+              <img src={state.user.avatar} alt="" className="size-full object-cover" />
+            ) : (
+              state.user.initials
+            )}
           </span>
           <div className="min-w-0">
             <p className="truncate text-[13px] font-medium text-[var(--warm-white)]">
@@ -187,9 +192,48 @@ function Notifications() {
   );
 }
 
+function ProfileMenu() {
+  const { state } = useLifeOS();
+  const navigate = useNavigate();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          aria-label="Profile"
+          className="ring-focus ml-1 flex size-9 items-center justify-center overflow-hidden rounded-full bg-[var(--sand)] text-[12px] font-semibold text-[var(--olive-deep)] transition-transform hover:scale-105"
+        >
+          {state.user.avatar ? (
+            <img src={state.user.avatar} alt="" className="size-full object-cover" />
+          ) : (
+            state.user.initials
+          )}
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-60 rounded-2xl p-2">
+        <DropdownMenuLabel className="px-3 py-2">
+          <p className="text-[13.5px] font-medium">{state.user.name}</p>
+          <p className="text-[12px] font-normal text-muted-foreground">{state.user.email}</p>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="rounded-xl px-3 py-2" asChild>
+          <Link to={"/settings" as never}>Profile & settings</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="rounded-xl px-3 py-2"
+          onSelect={() => void navigate({ to: "/auth" as never })}
+        >
+          <LogOut className="size-4" />
+          Sign out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { state } = useLifeOS();
   const [searchOpen, setSearchOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -203,6 +247,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  if (pathname.startsWith("/auth")) return <>{children}</>;
 
   return (
     <div className="min-h-screen bg-background">
@@ -243,13 +289,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
           <div className="ml-auto flex items-center gap-1">
             <Notifications />
-            <Link
-              to={"/settings" as never}
-              aria-label="Profile"
-              className="ring-focus ml-1 flex size-9 items-center justify-center rounded-full bg-[var(--sand)] text-[12px] font-semibold text-[var(--olive-deep)] transition-transform hover:scale-105"
-            >
-              {state.user.initials}
-            </Link>
+            <ProfileMenu />
           </div>
         </header>
 
