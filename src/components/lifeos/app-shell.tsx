@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   Bell,
   CalendarDays,
@@ -6,6 +6,7 @@ import {
   Flame,
   LayoutGrid,
   Leaf,
+  LogOut,
   Menu,
   NotebookPen,
   Search,
@@ -282,13 +283,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
           <div className="ml-auto flex items-center gap-1">
             <Notifications />
-            <Link
-              to={"/settings" as never}
-              aria-label="Profile"
-              className="ring-focus ml-1 flex size-9 items-center justify-center rounded-full bg-[var(--sand)] text-[12px] font-semibold text-[var(--olive-deep)] transition-transform hover:scale-105"
-            >
-              {state.user.initials}
-            </Link>
+            <ProfileMenu />
           </div>
         </header>
 
