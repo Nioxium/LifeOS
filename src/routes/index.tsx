@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const previewUrl = "https://id-preview--9542639c-b121-44ca-9c8b-4342080a0c52.lovable.app/hero-landing.jpg";
 
