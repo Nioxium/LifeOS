@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import {
   addDays,
   addMonths,
@@ -41,25 +40,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLifeOS } from "@/lib/lifeos/store";
 import type { CalendarEvent, EventKind } from "@/lib/lifeos/types";
 import { cn } from "@/lib/utils";
-
-export const Route = createFileRoute("/calendar")({
-  head: () => ({
-    meta: [
-      { title: "Calendar — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Month, week and day views that combine meetings, habits, personal events and task deadlines.",
-      },
-      { property: "og:title", content: "Calendar — LifeOS" },
-      {
-        property: "og:description",
-        content: "One timeline for meetings, habits and task deadlines.",
-      },
-    ],
-  }),
-  component: CalendarPage,
-});
 
 const kindTone: Record<EventKind, string> = {
   meeting: "bg-[var(--olive)] text-[var(--warm-white)]",
@@ -191,7 +171,7 @@ function EventDialog({
   );
 }
 
-function CalendarPage() {
+export default function CalendarPage() {
   const { state, updateEvent } = useLifeOS();
   const [view, setView] = useState<View>("month");
   const [cursor, setCursor] = useState(new Date());

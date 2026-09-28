@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import type { ScoredTask } from "@/lib/lifeos/ai";
@@ -45,7 +45,7 @@ export function AIPriorityHero({ items }: { items: ScoredTask[] }) {
 
         <div className="mt-6 flex flex-wrap items-center gap-4">
           <Link
-            to={"/ai-planner" as never}
+            to="/ai-planner"
             className="ring-focus inline-flex items-center gap-1.5 rounded-full bg-[var(--olive)] px-4 py-2 text-[13px] font-medium text-[var(--warm-white)] transition-all duration-200 hover:bg-[var(--olive-deep)]"
           >
             View AI Plan <ArrowRight className="size-3.5" />

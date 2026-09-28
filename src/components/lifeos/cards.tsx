@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { format, formatDistanceToNow, isToday, parseISO, subDays } from "date-fns";
 import { Flame } from "lucide-react";
 
@@ -95,7 +95,7 @@ export function GoalCard({
 
   return (
     <Link
-      to={"/goals" as never}
+      to="/goals"
       className="surface-hover ring-focus block rounded-xl border border-border bg-card px-4 py-4"
     >
       <div className="flex items-start justify-between gap-3">

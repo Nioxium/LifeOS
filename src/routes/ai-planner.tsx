@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ArrowRight, Check, RefreshCw, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -11,22 +11,6 @@ import { buildWeeklyReview, getDayPlan, type DayPlan, type PlanBlock } from "@/l
 import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/ai-planner")({
-  head: () => ({
-    meta: [
-      { title: "AI Planner — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Let LifeOS organize your day around what matters most, with a morning, afternoon and evening plan you can accept or regenerate.",
-      },
-      { property: "og:title", content: "AI Planner — LifeOS" },
-      { property: "og:description", content: "A calm, explained plan for your day." },
-    ],
-  }),
-  component: AIPlannerPage,
-});
-
 const kindTone: Record<PlanBlock["kind"], string> = {
   focus: "bg-[var(--olive-deep)]",
   task: "bg-[var(--olive)]",
@@ -35,7 +19,7 @@ const kindTone: Record<PlanBlock["kind"], string> = {
   break: "bg-[var(--sand)]",
 };
 
-function AIPlannerPage() {
+export default function AIPlannerPage() {
   const { state, pushNotification } = useLifeOS();
   const [plan, setPlan] = useState<DayPlan | null>(null);
   const [loading, setLoading] = useState(true);

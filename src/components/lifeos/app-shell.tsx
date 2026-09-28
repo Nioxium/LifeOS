@@ -1,4 +1,4 @@
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   Bell,
   CalendarDays,
@@ -91,7 +91,7 @@ function NavItem({
 }
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { pathname } = useLocation();
   const { state } = useLifeOS();
 
   return (
@@ -218,12 +218,9 @@ function ProfileMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="rounded-xl px-3 py-2" asChild>
-          <Link to={"/settings" as never}>Profile & settings</Link>
+          <Link to="/settings">Profile & settings</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem
-          className="rounded-xl px-3 py-2"
-          onSelect={() => void navigate({ to: "/auth" as never })}
-        >
+        <DropdownMenuItem className="rounded-xl px-3 py-2" onSelect={() => navigate("/auth")}>
           <LogOut className="size-4" />
           Sign out
         </DropdownMenuItem>
@@ -232,8 +229,8 @@ function ProfileMenu() {
   );
 }
 
-export function AppShell({ children }: { children: ReactNode }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+export function AppShell({ children }: { children?: ReactNode }) {
+  const { pathname } = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -294,7 +291,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
 
         <main className="mx-auto w-full max-w-[1280px] px-4 pt-6 pb-28 sm:px-6 lg:px-10 lg:pb-14">
-          {children}
+          {children ?? <Outlet />}
         </main>
       </div>
 
@@ -305,7 +302,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             return (
               <Link
                 key={to}
-                to={to as never}
+                to={to}
                 className={cn(
                   "flex flex-1 flex-col items-center gap-1 rounded-xl py-1.5 text-[11px] transition-colors",
                   active ? "text-[var(--olive)]" : "text-muted-foreground",

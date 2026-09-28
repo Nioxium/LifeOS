@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { format, isToday, parseISO } from "date-fns";
 import { ArrowRight, Plus } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -13,28 +13,6 @@ import { rankTasks } from "@/lib/lifeos/ai";
 import { useLifeOS } from "@/lib/lifeos/store";
 import type { Task } from "@/lib/lifeos/types";
 
-export const Route = createFileRoute("/dashboard")({
-  head: () => ({
-    meta: [
-      { title: "Dashboard — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Your LifeOS dashboard: AI-ranked priorities, today's tasks, habits, goals, notes and upcoming calendar.",
-      },
-      {
-        property: "og:title",
-        content: "Dashboard — LifeOS",
-      },
-      {
-        property: "og:description",
-        content: "Your calm, intelligent personal operating system.",
-      },
-    ],
-  }),
-  component: Dashboard,
-});
-
 function greeting() {
   const h = new Date().getHours();
   if (h < 12) return "Good morning";
@@ -42,7 +20,7 @@ function greeting() {
   return "Good evening";
 }
 
-function Dashboard() {
+export default function Dashboard() {
   const { state } = useLifeOS();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<Task | null>(null);

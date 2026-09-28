@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { differenceInCalendarDays, format, parseISO } from "date-fns";
 import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -27,25 +26,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { uid, useLifeOS } from "@/lib/lifeos/store";
 import type { GoalCategory } from "@/lib/lifeos/types";
 import { cn } from "@/lib/utils";
-
-export const Route = createFileRoute("/goals")({
-  head: () => ({
-    meta: [
-      { title: "Goals — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Break ambitions into milestones, track progress and link the tasks that move them forward.",
-      },
-      { property: "og:title", content: "Goals — LifeOS" },
-      {
-        property: "og:description",
-        content: "Milestones, progress and linked tasks for every goal.",
-      },
-    ],
-  }),
-  component: GoalsPage,
-});
 
 const categories: GoalCategory[] = ["Personal", "Career", "Health", "Learning", "Finance", "Other"];
 
@@ -158,7 +138,7 @@ function NewGoalDialog({
   );
 }
 
-function GoalsPage() {
+export default function GoalsPage() {
   const { state, toggleMilestone, deleteGoal } = useLifeOS();
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState<GoalCategory | "All">("All");

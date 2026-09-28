@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { addDays, format, startOfWeek } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import { useMemo } from "react";
@@ -9,23 +8,7 @@ import { buildWeeklyReview, rankTasks } from "@/lib/lifeos/ai";
 import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/weekly-plan")({
-  head: () => ({
-    meta: [
-      { title: "Weekly Plan — LifeOS" },
-      {
-        name: "description",
-        content:
-          "A balanced week: your highest-leverage work spread across the days, with review insights to guide it.",
-      },
-      { property: "og:title", content: "Weekly Plan — LifeOS" },
-      { property: "og:description", content: "Spread your priorities across a balanced week." },
-    ],
-  }),
-  component: WeeklyPlanPage,
-});
-
-function WeeklyPlanPage() {
+export default function WeeklyPlanPage() {
   const { state } = useLifeOS();
   const ranked = useMemo(() => rankTasks(state), [state]);
   const review = buildWeeklyReview(state);

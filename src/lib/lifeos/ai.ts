@@ -3,7 +3,7 @@
  *
  * This is a deterministic, local heuristic engine — not a machine-learning
  * model. It is intentionally isolated behind a small async interface so a real
- * AI API (Lovable AI, OpenAI, etc.) can be swapped in later without touching
+ * AI API can be swapped in later without touching
  * any UI code: replace the bodies of `getPriorities`, `getDayPlan` and
  * `getWeeklyReview` with network calls that return the same shapes.
  */

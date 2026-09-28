@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
@@ -18,25 +17,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLifeOS } from "@/lib/lifeos/store";
 import type { Task } from "@/lib/lifeos/types";
 
-export const Route = createFileRoute("/tasks")({
-  head: () => ({
-    meta: [
-      { title: "Tasks — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Plan, prioritise and complete your tasks with due dates, tags, estimates and goal links.",
-      },
-      { property: "og:title", content: "Tasks — LifeOS" },
-      { property: "og:description", content: "A calm task manager with AI-weighted priorities." },
-    ],
-  }),
-  component: TasksPage,
-});
-
 type TabKey = "all" | "today" | "upcoming" | "completed";
 
-function TasksPage() {
+export default function TasksPage() {
   const { state, reorderTasks } = useLifeOS();
   const [tab, setTab] = useState<TabKey>("all");
   const [priority, setPriority] = useState("all");

@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { eachDayOfInterval, format, startOfMonth, endOfMonth, subDays } from "date-fns";
 import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -35,25 +34,6 @@ import { bestStreak, currentStreak } from "@/lib/lifeos/ai";
 import { useLifeOS } from "@/lib/lifeos/store";
 import type { Habit, HabitFrequency } from "@/lib/lifeos/types";
 import { cn } from "@/lib/utils";
-
-export const Route = createFileRoute("/habits")({
-  head: () => ({
-    meta: [
-      { title: "Habits — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Track streaks, weekly completion and monthly consistency for the routines that matter.",
-      },
-      { property: "og:title", content: "Habits — LifeOS" },
-      {
-        property: "og:description",
-        content: "Streaks, weekly completion and a calm consistency heatmap.",
-      },
-    ],
-  }),
-  component: HabitsPage,
-});
 
 function Heatmap({ habit }: { habit: Habit }) {
   const days = eachDayOfInterval({ start: startOfMonth(new Date()), end: endOfMonth(new Date()) });
@@ -208,7 +188,7 @@ function NewHabitDialog({
   );
 }
 
-function HabitsPage() {
+export default function HabitsPage() {
   const { state, deleteHabit } = useLifeOS();
   const [open, setOpen] = useState(false);
 

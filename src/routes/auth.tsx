@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Check, Leaf, Loader2, Mail } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
@@ -9,22 +9,6 @@ import { Label } from "@/components/ui/label";
 import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/auth")({
-  head: () => ({
-    meta: [
-      { title: "Sign in — LifeOS" },
-      {
-        name: "description",
-        content:
-          "Sign in to LifeOS to pick up your tasks, habits, goals and daily AI plan where you left off.",
-      },
-      { property: "og:title", content: "Sign in — LifeOS" },
-      { property: "og:description", content: "Your calm, intelligent personal operating system." },
-    ],
-  }),
-  component: AuthPage,
-});
-
 type Mode = "signin" | "signup" | "forgot";
 
 const highlights = [
@@ -33,7 +17,7 @@ const highlights = [
   "Priorities explained, never just ranked",
 ];
 
-function AuthPage() {
+export default function AuthPage() {
   const navigate = useNavigate();
   const { updateUser } = useLifeOS();
   const [mode, setMode] = useState<Mode>("signin");
@@ -63,7 +47,7 @@ function AuthPage() {
         updateUser({ email: email.trim() });
       }
       toast.success(label);
-      void navigate({ to: "/dashboard" as never });
+      navigate("/dashboard");
     }, 700);
   };
 
@@ -266,14 +250,14 @@ function AuthPage() {
                 </button>
               </p>
 
-              <p
+              {/* <p
                 className={cn(
                   "mt-8 rounded-xl border border-border bg-card px-4 py-3 text-[12px] leading-relaxed text-muted-foreground",
                 )}
               >
                 These sign-in screens are the front end only — LifeOS still runs on demo data in
                 this browser. Connect a backend to make accounts real.
-              </p>
+              </p> */}
             </>
           )}
         </div>

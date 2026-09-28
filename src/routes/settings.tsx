@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -9,22 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useLifeOS } from "@/lib/lifeos/store";
 
-export const Route = createFileRoute("/settings")({
-  head: () => ({
-    meta: [
-      { title: "Settings — LifeOS" },
-      {
-        name: "description",
-        content: "Manage your LifeOS profile, planning preferences, reminders and demo data.",
-      },
-      { property: "og:title", content: "Settings — LifeOS" },
-      { property: "og:description", content: "Profile, planning preferences and reminders." },
-    ],
-  }),
-  component: SettingsPage,
-});
-
-function SettingsPage() {
+export default function SettingsPage() {
   const { state, resetDemo, updateUser } = useLifeOS();
   const [reminders, setReminders] = useState(true);
   const [weeklyEmail, setWeeklyEmail] = useState(false);

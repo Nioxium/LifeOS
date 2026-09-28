@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
 import { Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -13,23 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/notes")({
-  head: () => ({
-    meta: [
-      { title: "Notes — LifeOS" },
-      {
-        name: "description",
-        content:
-          "A quiet place for ideas, reading lists and thinking — with tags, search and a distraction-free editor.",
-      },
-      { property: "og:title", content: "Notes — LifeOS" },
-      { property: "og:description", content: "Capture ideas in a calm, distraction-free editor." },
-    ],
-  }),
-  component: NotesPage,
-});
-
-function NotesPage() {
+export default function NotesPage() {
   const { state, addNote, updateNote, deleteNote } = useLifeOS();
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState<string | null>(null);

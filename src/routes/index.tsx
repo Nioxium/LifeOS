@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   CalendarDays,
@@ -14,31 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const previewUrl = "https://id-preview--9542639c-b121-44ca-9c8b-4342080a0c52.lovable.app/hero-landing.jpg";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "LifeOS — Your calm home for tasks, habits and goals" },
-      {
-        name: "description",
-        content:
-          "LifeOS brings tasks, habits, goals, notes and calendar into one calm workspace, with an AI priority system that shows what deserves your attention today.",
-      },
-      {
-        property: "og:title",
-        content: "LifeOS — Everything in your life, organized in one calm space",
-      },
-      {
-        property: "og:description",
-        content: "A personal operating system for tasks, habits, goals, notes and your calendar.",
-      },
-      { property: "og:image", content: previewUrl },
-      { name: "twitter:image", content: previewUrl },
-    ],
-  }),
-  component: LandingPage,
-});
+const previewUrl = "/hero-landing.jpg";
 
 const features = [
   {
@@ -85,7 +61,7 @@ const highlights = [
   "Goals broken into milestones with clear progress",
 ];
 
-function LandingPage() {
+export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[var(--ivory)] text-foreground">
       {/* Nav */}
@@ -121,8 +97,8 @@ function LandingPage() {
               Start the day knowing exactly what deserves your attention.
             </h1>
             <p className="mt-5 text-[16.5px] leading-relaxed text-muted-foreground sm:text-[18px]">
-              LifeOS brings tasks, habits, goals, notes and calendar into one calm workspace.
-              Our AI planner ranks your priorities and explains why one thing comes first.
+              LifeOS brings tasks, habits, goals, notes and calendar into one calm workspace. Our AI
+              planner ranks your priorities and explains why one thing comes first.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button asChild size="lg" className="h-12 gap-2 rounded-full px-7 text-[15px]">
@@ -230,7 +206,9 @@ function LandingPage() {
                 <div className="flex items-center gap-2 text-[12px] font-medium tracking-wide text-[var(--olive)] uppercase">
                   <Wand2 className="size-3.5" /> Morning
                 </div>
-                <p className="mt-2 text-[14px] font-medium">Deep work: Finish portfolio case study</p>
+                <p className="mt-2 text-[14px] font-medium">
+                  Deep work: Finish portfolio case study
+                </p>
                 <p className="mt-1 text-[12.5px] text-muted-foreground">
                   Why first: due today and tied to your top goal.
                 </p>
@@ -257,7 +235,9 @@ function LandingPage() {
           </div>
 
           <div className="order-1 max-w-xl lg:order-2">
-            <p className="text-[12px] tracking-[0.16em] text-[var(--olive)] uppercase">AI Planner</p>
+            <p className="text-[12px] tracking-[0.16em] text-[var(--olive)] uppercase">
+              AI Planner
+            </p>
             <h2 className="mt-3 text-[30px] font-semibold tracking-tight text-[var(--olive-deep)] sm:text-[36px]">
               A plan that explains itself.
             </h2>
@@ -333,4 +313,3 @@ function LandingPage() {
     </div>
   );
 }
-

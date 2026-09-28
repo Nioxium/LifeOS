@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "react-router-dom";
 import { CalendarDays, CheckSquare, Flame, NotebookPen, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -29,7 +29,7 @@ export function GlobalSearch({
 
   const go = (to: string) => {
     onOpenChange(false);
-    void navigate({ to: to as never });
+    navigate(to);
   };
 
   return (

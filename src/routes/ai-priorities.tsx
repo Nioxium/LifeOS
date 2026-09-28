@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
 import { useMemo } from "react";
 
@@ -14,29 +13,13 @@ import { rankTasks } from "@/lib/lifeos/ai";
 import { useLifeOS } from "@/lib/lifeos/store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/ai-priorities")({
-  head: () => ({
-    meta: [
-      { title: "AI Priorities — LifeOS" },
-      {
-        name: "description",
-        content:
-          "See exactly why each task is ranked: deadline urgency, goal relevance, your priority, context and effort fit.",
-      },
-      { property: "og:title", content: "AI Priorities — LifeOS" },
-      { property: "og:description", content: "A transparent priority score for every open task." },
-    ],
-  }),
-  component: AIPrioritiesPage,
-});
-
 const levelTone = {
   High: "bg-[var(--olive-deep)] text-[var(--warm-white)]",
   Medium: "bg-[var(--sage)] text-[var(--olive-deep)]",
   Low: "bg-[var(--sand)] text-[var(--olive-deep)]",
 } as const;
 
-function AIPrioritiesPage() {
+export default function AIPrioritiesPage() {
   const { state } = useLifeOS();
   const ranked = useMemo(() => rankTasks(state), [state]);
 
